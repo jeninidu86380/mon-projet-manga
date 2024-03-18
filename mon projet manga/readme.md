@@ -6,7 +6,7 @@ Site internet de présentation des mangas.
  
 ### Front-office
 - Accueil : Liste de mes réalisations en page d'accueil
-- Page de détail : Présentation d'une réalisation
+- Page de détail : Détail et lien... 
  
 ### Back-office
 - Page de création de réalisation (si possible)
