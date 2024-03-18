@@ -1,0 +1,18 @@
+Rozat
+    Jennifer
+    2024-02-09
+    jenniferrozat@gmail.com
+    non
+    Pantalons
+
+<!-- Chemin vers le fichier texte
+$cheminFichier = "monFichier.txt";
+// Contenu à écrire dans le fichier
+$contenu = "Bonjour, monde !";
+// Ouvrir le fichier en mode écriture ('w' pour écraser le contenu existant)
+$fichier = fopen($cheminFichier, "w");
+// Écrire le contenu dans le fichier
+fwrite($fichier, $contenu);
+// Fermer le fichier
+fclose($fichier);
+echo "Le contenu a été écrit avec succès dans le fichier.";-->

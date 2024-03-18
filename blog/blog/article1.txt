@@ -1,0 +1,4 @@
+-ouvrir le dossier blog
+-récupération des fichiers
+-lire automatiquement les fichiers dans une boucle
+    afficher l'article
