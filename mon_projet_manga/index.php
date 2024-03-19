@@ -24,7 +24,7 @@
     }
     // Requête SELECT
     // Exécuter une requête SELECT
-    $sql = "SELECT * FROM table";
+    $sql = "SELECT * FROM manga";
     $resultat = mysqli_query($connexion, $sql);
     // Vérifier si la requête a réussi
     if ($resultat) {
