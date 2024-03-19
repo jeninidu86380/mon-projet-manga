@@ -23,9 +23,27 @@
     echo "Connexion réussie à la base de données.";
     }
     // Requête SELECT
-
+    // Exécuter une requête SELECT
+    $sql = "SELECT * FROM table";
+    $resultat = mysqli_query($connexion, $sql);
+    // Vérifier si la requête a réussi
+    if ($resultat) {
+    print_r($resultat);
+    } else {
+    echo "Erreur : " . mysqli_error($connexion);
+    }
+    // Fermer la connexion
+    mysqli_close($connexion);
     // Boucle foreach pour afficher toutes les création
-
+    // Exemple de récupération des résultats
+    if ($resultat) {
+    print_r($resultat);
+    foreach($resultat as $commande) {
+    print_r($resultat);
+    }
+    } else {
+    echo "Erreur : " . mysqli_error($connexion);
+    }
 
     ?>
 </body>
