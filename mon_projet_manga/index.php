@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projet manga</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <!--contenu de ma page...-->
+    </div>
     <h1>Mon site de manga</h1>
     <?php
-    // Connexion à la BDD
+    /* Connexion à la BDD
     $serveur = "localhost";
     $utilisateur = "root";
     $mot_de_passe = "";
@@ -43,7 +47,7 @@
     }
     } else {
     echo "Erreur : " . mysqli_error($connexion);
-    }
+    }*/
 
     ?>
 </body>
