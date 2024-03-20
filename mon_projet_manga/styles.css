@@ -1,0 +1,14 @@
+body  {
+    background-color: darkgray;
+    Background-size : cover; 
+}
+.img-container {
+    background-image: url('img.jpg');
+    background-size: cover;
+    background-position: center;
+} 
+.ratio-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
