@@ -2,8 +2,8 @@ body  {
     background-color: darkgray;
     Background-size : cover; 
 }
-.img-container {
+#img-container {
     background-image: url('img.jpg');
     background-size: cover;
     background-position: center;
-} 
+}   
