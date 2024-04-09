@@ -15,6 +15,14 @@
     }
     $sql = "SELECT * FROM taches";
 	$resultat = mysqli_query($connexion, $sql);
+	/* Vérifier si la requête a réussi
+	if ($resultat) {
+	print_r($resultat);
+	} else {
+	echo "Erreur : " . mysqli_error($connexion);
+	}*/
+	// Fermer la connexion
+	mysqli_close($connexion);
 	// Exemple de récupération des résultats
 	if ($resultat) {
 		print_r($resultat);
