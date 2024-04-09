@@ -40,7 +40,7 @@
         </div>
         <!-- Bloc du formulaire d'ajout de tâches -->
         <div class="add-task">
-            <h2>Ajouter une nouvelle tâche : </h2>
+            <h2>Ajouter nouvelle tâche : </h2>
             <form id="task-form">
                 <input type="text" id="task-input" placeholder="Entrez une nouvelle tâche">
                 <button type="submit">Ajouter</button>
