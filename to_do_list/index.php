@@ -1,4 +1,7 @@
-<?php
+<?php ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
     // Connexion à la base de données
     $serveur = "localhost"; // Adresse du serveur MySQL
     $utilisateur = "root"; // Nom d'utilisateur MySQL
@@ -33,7 +36,7 @@
         <hr>
         <h2>Liste des tâches :</h2>
         <ul>
-            <?php
+            <?php 
                 // Traitement de l'ajout de tâche
                 if(isset($_POST['add'])) { // Vérifie si le formulaire d'ajout est soumis
                     if(!empty($_POST['new_task'])) { // Vérifie si le champ de texte n'est pas vide
