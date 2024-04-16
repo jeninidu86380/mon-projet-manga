@@ -34,7 +34,7 @@
         <form action="index.php" method="post">
             <button type="submit" name="delete">Supprimer</button>
             <hr>
-            <h2>Liste des tâches</h2>
+            <h2>Liste des tâches :</h2>
             <ul>
                 <?php
                     // Affichage des tâches avec une case à cocher
@@ -44,7 +44,7 @@
                         while ($liste = mysqli_fetch_assoc($resultat)) {
                             echo "<li>";
                             echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>";
-                            echo "<label>" . $liste['title'] . "</label>";
+                            echo "<label>" . $liste['titre'] . "</label>";
                             echo "</li>";
                         }
                     } else {

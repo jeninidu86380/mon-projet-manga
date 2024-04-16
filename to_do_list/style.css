@@ -4,13 +4,14 @@ body {
 /* Style du conteneur principal */
 .container {
     background-color: #75caf8; /* Couleur de fond */
-    font-family: Arial, sans-serif; /* Police de caractères */
+    font-family: 'Grape Nuts', cursive; /* Police de caractères */
     justify-content: center; /* Centrage horizontal */
     align-items: center; /* Centrage vertical */
     max-width: 600px; /* Largeur maximale du conteneur */
     margin: auto; /* Centrage horizontal du conteneur */
     padding: 20px; /* Espacement intérieur */
     min-height: 100vh; /* Hauteur minimale équivalente à la taille de l'écran */
+    border-radius: 30px; /*arrondit les coins de la bordure*/
 }
 
 /* Style des formulaires à l'intérieur du conteneur */
@@ -27,6 +28,7 @@ body {
 /* Style des boutons */
 .container button {
     margin-top: 20px; /* Espacement du haut du bouton */
+    border-radius: 40px; /*arrondit les coins de la bordure*/
 }
 
 /* Style global pour tous les éléments */
