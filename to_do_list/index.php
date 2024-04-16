@@ -28,8 +28,8 @@
     <div class="container">
         <h1>Ma To-Do List !</h1>
         <form action="index.php" method="post">
-            <input type="text" name="nouvelle_tache" placeholder="Nouvelle tâche">
-            <button type="submit" name="ajouter">Ajouter</button>  
+            <input type="text" name="new_task" placeholder="Nouvelle tâche">
+            <button type="submit" name="add">Ajouter</button>  
         </form>
         <form action="index.php" method="post">
             <button type="submit" name="delete">Supprimer</button>
@@ -44,7 +44,7 @@
                         while ($liste = mysqli_fetch_assoc($resultat)) {
                             echo "<li>";
                             echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>";
-                            echo "<label>" . $liste['titre'] . "</label>";
+                            echo "<label>" . $liste['title'] . "</label>";
                             echo "</li>";
                         }
                     } else {
