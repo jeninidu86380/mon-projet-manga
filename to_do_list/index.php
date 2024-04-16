@@ -72,12 +72,8 @@ error_reporting(E_ALL);
                             if(mysqli_query($connexion, $sql)) { // Exécute la requête SQL de suppression
                                 header("Location: index.php"); // Redirige vers la page principale après la suppression
                                 exit();
-                            } else {
-                                echo "Erreur lors de la suppression de la tâche : " . mysqli_error($connexion); // Affiche une erreur si la suppression échoue
                             }
-                        }
-                    } else {
-                        echo "Aucune tâche sélectionnée pour suppression."; // Message si aucune tâche n'est sélectionnée pour suppression
+                        }    
                     }
                 }
             ?>
