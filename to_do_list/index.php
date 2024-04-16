@@ -14,92 +14,79 @@
     } else {
         echo "Connexion réussie à la base de données.<br>";
     }*/
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link href="style.css" rel="stylesheet"> 
+    <link href="style.css" rel="stylesheet"> <!-- Inclusion du fichier de style -->
 </head>
 <body>
     <div class="container">
         <h1>Ma To-Do List !</h1>
+        <!-- Formulaire pour ajouter une nouvelle tâche -->
         <form action="index.php" method="post">
             <input type="text" name="new_task" placeholder="Nouvelle tâche">
             <button type="submit" name="add">Ajouter</button>  
         </form>
-        <form action="index.php" method="post">
-            <button type="submit" name="delete">Supprimer</button> <!-- Formulaire de suppression -->
-            <hr>
-            <h2>Liste des tâches :</h2>
-            <ul>
-                <?php
-                    // Affichage des tâches avec une case à cocher
-                    $sql = "SELECT * FROM liste";
-                    $resultat = mysqli_query($connexion, $sql);
-                    if ($resultat) {
-                        while ($liste = mysqli_fetch_assoc($resultat)) { //fonction utilisé pour récupérer ligne résultats d'une requête select
-                            echo "<li>";
-                            echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>"; // Case à cocher pour chaque tâche
-                            echo "<label>" . $liste['titre'] . "</label>"; // Affichage du titre de la tâche
-                            echo "</li>";
+        <hr>
+        <h2>Liste des tâches :</h2>
+        <ul>
+            <?php
+                // Traitement de l'ajout de tâche
+                if(isset($_POST['add'])) { // Vérifie si le formulaire d'ajout est soumis
+                    if(!empty($_POST['new_task'])) { // Vérifie si le champ de texte n'est pas vide
+                        $nouvelle_tache = $_POST['new_task']; // Récupère la nouvelle tâche
+                        $sql = "INSERT INTO liste (titre, fait) VALUES ('$nouvelle_tache', 0)"; // Requête SQL pour ajouter la tâche
+                        if(mysqli_query($connexion, $sql)) { // Exécute la requête SQL
+                            header("Location: index.php"); // Redirige vers la page principale après l'ajout
+                            exit();
+                        } else {
+                            echo "Erreur lors de l'ajout de la tâche : " . mysqli_error($connexion); // Affiche une erreur en cas d'échec de l'ajout
                         }
                     } else {
-                        echo "Erreur : " . mysqli_error($connexion); // En cas d'erreur lors de la requête SQL
+                        echo "Veuillez saisir une nouvelle tâche."; // Message si le champ de texte est vide
                     }
-                ?>
-            </ul>
-            <!-- Formulaire pour enregistrer les tâches -->
-            <form action="index.php" method="post">
-                <button type="submit" name="delete">Enregistrer</button>
-            </form>
-            <!-- Formulaire pour supprimer les tâches -->
-            <form action="index.php" method="post">
-                <button type="submit" name="delete">Supprimer</button>
-            </form>
-        </div>
-    </body>
+                }
+                // Affichage des tâches avec une case à cocher
+                $sql = "SELECT * FROM liste"; // Requête SQL pour récupérer les tâches
+                $resultat = mysqli_query($connexion, $sql); // Exécute la requête SQL
+                if ($resultat) { // Vérifie si la requête a réussi
+                    while ($liste = mysqli_fetch_assoc($resultat)) { // Parcourt les résultats de la requête
+                        echo "<li>";
+                        echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>"; // Affiche une case à cocher pour chaque tâche
+                        echo "<label>" . $liste['titre'] . "</label>"; // Affiche le titre de la tâche
+                        echo "</li>";
+                    }
+                } else {
+                    echo "Erreur : " . mysqli_error($connexion); // Affiche une erreur en cas d'échec de la requête SQL
+                }
+                if(isset($_POST['delete'])) { // Vérifie si le formulaire de suppression est soumis
+                    if(isset($_POST['task'])) { // Vérifie si des tâches sont sélectionnées pour suppression
+                        foreach($_POST['task'] as $task_id) { // Parcourt les tâches sélectionnées
+                            $sql = "DELETE FROM liste WHERE id = $task_id"; // Requête SQL pour supprimer la tâche de la base de données
+                            if(mysqli_query($connexion, $sql)) { // Exécute la requête SQL de suppression
+                                header("Location: index.php"); // Redirige vers la page principale après la suppression
+                                exit();
+                            } else {
+                                echo "Erreur lors de la suppression de la tâche : " . mysqli_error($connexion); // Affiche une erreur si la suppression échoue
+                            }
+                        }
+                    } else {
+                        echo "Aucune tâche sélectionnée pour suppression."; // Message si aucune tâche n'est sélectionnée pour suppression
+                    }
+                }
+            ?>
+        </ul>
+        <!-- Formulaire pour enregistrer les tâches -->
+        <form action="index.php" method="post">
+            <button type="submit" name="save">Enregistrer</button> <!-- Bouton pour enregistrer les tâches -->
+        </form>
+        <!-- Formulaire pour supprimer les tâches -->
+        <form action="index.php" method="post">
+            <button type="submit" name="delete">Supprimer</button> <!-- Bouton pour supprimer les tâches sélectionnées -->
+        </form>
+    </div>
+</body>
 </html>
-
-<?php
-    // Vérifie si le formulaire de suppression a été soumis
-    if(isset($_POST['delete'])) {
-        // Vérifie si des tâches sont cochées pour suppression
-        if(isset($_POST['task'])) {
-            // Parcourt les tâches cochées
-            foreach($_POST['task'] as $task_id) {
-                // Supprime la tâche de la base de données
-                $sql = "DELETE FROM liste WHERE id = $task_id";
-                mysqli_query($connexion, $sql);
-            }
-            // Redirige vers la page principale après la suppression
-            header("Location: index.php");
-            exit();
-        }
-    }
-    // Traitement de l'ajout de tâche
-    if(isset($_POST['add'])) { // Changé 'ajouter' pour correspondre au bouton dans le formulaire
-        // Vérification si le champ de texte n'est pas vide
-        if(!empty($_POST['new_task'])) { // Changé 'nouvelle_tache' pour correspondre à l'attribut 'name' de l'input
-            // Récupération de la nouvelle tâche depuis le formulaire
-            $nouvelle_tache = $_POST['new_task']; // Changé 'nouvelle_tache' en 'new_task'
-
-            // Création de la requête SQL pour insérer la nouvelle tâche dans la base de données
-            $sql = "INSERT INTO liste (titre, fait) VALUES ('$nouvelle_tache', 0)";
-
-            // Exécution de la requête SQL
-            if(mysqli_query($connexion, $sql)) {
-                // Recharge la page pour afficher la tâche ajoutée
-                header("Location: index.php");
-                exit();
-            } else {
-                echo "Erreur lors de l'ajout de la tâche : " . mysqli_error($connexion);
-            }
-        } else {
-            echo "Veuillez saisir une nouvelle tâche.";
-        }
-    }
-?>
