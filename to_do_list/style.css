@@ -1,0 +1,63 @@
+/* Style du conteneur principal */
+.container {
+    background-color: #75caf8; /* Couleur de fond */
+    font-family: Arial, sans-serif; /* Police de caractères */
+    justify-content: center; /* Centrage horizontal */
+    align-items: center; /* Centrage vertical */
+    max-width: 600px; /* Largeur maximale du conteneur */
+    margin: auto; /* Centrage horizontal du conteneur */
+    padding: 20px; /* Espacement intérieur */
+    min-height: 100vh; /* Hauteur minimale équivalente à la taille de l'écran */
+}
+
+/* Style des formulaires à l'intérieur du conteneur */
+.container form {
+    text-align: center; /* Centrage horizontal des éléments du formulaire */
+}
+
+/* Style des champs de texte */
+.container input[type="text"] {
+    width: 60%; /* Largeur du champ de texte */
+    margin: 20px; /* Espacement entre les champs de texte */
+}
+
+/* Style des boutons */
+.container button {
+    margin-top: 20px; /* Espacement du haut du bouton */
+}
+
+/* Style global pour tous les éléments */
+* {
+    color: hsl(279, 99%, 43%); /* Couleur de texte pour tous les éléments */
+}
+
+/* Style des titres h1 et h2 */
+h1, h2 {
+    margin: 30px; /* Espacement autour des titres */
+    text-align: center; /* Centrage horizontal des titres */
+    letter-spacing: 3px; /* Espacement entre les lettres */
+    text-transform: uppercase; /* Conversion en majuscules */
+    text-shadow: 3px 2px 3px rgb(96, 63, 245); /* Ombre portée */
+}
+
+/* Style au survol des boutons */
+button:hover {
+    background: #aa97ff; /* Changement de couleur de fond */
+}
+
+/* Style de la liste des tâches */
+ul {
+    list-style: none; /* Suppression des puces de liste */
+    padding: 0%; /* Suppression des marges intérieures */
+}
+
+/* Style des éléments de liste */
+li {
+    display: flex; /* Affichage en flexbox pour aligner les éléments */
+    margin-bottom: 10px; /* Espacement entre les éléments de la liste */
+}
+
+/* Style des cases à cocher */
+li input[type="checkbox"] {
+    margin-right: 10px; /* Espacement à droite des cases à cocher */
+}

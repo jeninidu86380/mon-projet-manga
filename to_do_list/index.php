@@ -17,41 +17,48 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Ma To-Do List !</h1>
-    <form action="index.php" method="post">
-        <input type="text" name="nouvelle_tache" placeholder="Nouvelle tâche">
-        <button type="submit" name="ajouter">Ajouter</button>
-    </form>
-    <hr>
-    <h2>Liste des tâches</h2>
-    <ul>
-        <?php
-            // Affichage des tâches avec une case à cocher
-            $sql = "SELECT * FROM liste";
-            $resultat = mysqli_query($connexion, $sql);
-            if ($resultat) {
-                while ($liste = mysqli_fetch_assoc($resultat)) {
-                    echo "<li>";
-                    echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>";
-                    echo "<label>" . $liste['titre'] . "</label>";
-                    echo "</li>";
-                }
-            } else {
-                echo "Erreur : " . mysqli_error($connexion);
-            }
-        ?>
-    </ul>
-    <form action="index.php" method="post">
-        <button type="submit" name="delete">Enregistrer</button>
-    </form>
-</body>
+    <div class="container">
+        <h1>Ma To-Do List !</h1>
+        <form action="index.php" method="post">
+            <input type="text" name="nouvelle_tache" placeholder="Nouvelle tâche">
+            <button type="submit" name="ajouter">Ajouter</button>  
+        </form>
+        <form action="index.php" method="post">
+            <button type="submit" name="delete">Supprimer</button>
+            <hr>
+            <h2>Liste des tâches</h2>
+            <ul>
+                <?php
+                    // Affichage des tâches avec une case à cocher
+                    $sql = "SELECT * FROM liste";
+                    $resultat = mysqli_query($connexion, $sql);
+                    if ($resultat) {
+                        while ($liste = mysqli_fetch_assoc($resultat)) {
+                            echo "<li>";
+                            echo "<input type='checkbox' name='task[]' value='" . $liste['id'] . "'>";
+                            echo "<label>" . $liste['titre'] . "</label>";
+                            echo "</li>";
+                        }
+                    } else {
+                        echo "Erreur : " . mysqli_error($connexion);
+                    }
+                ?>
+            </ul>
+            <form action="index.php" method="post">
+                <button type="submit" name="delete">Enregistrer</button>
+            <form action="index.php" method="post">
+                <button type="submit" name="delete">Supprimer</button>
+            </form>
+        </div>
+    </body>
 </html>
 
 <?php
@@ -70,14 +77,28 @@
             exit();
         }
     }
+    // Traitement de l'ajout de tâche
     if(isset($_POST['ajouter'])) {
-        // Ajoute la nouvelle tâche à la base de données
-        $sql = "INSERT INTO liste (titre, fait) VALUES ('$nouvelle_tache', 0)";
-        mysqli_query($connexion, $sql);
-
-        // Redirige vers la page principale après l'ajout
-        header("Location: index.php");
-        exit();
+        // Vérification si le champ de texte n'est pas vide
+        if(!empty($_POST['nouvelle_tache'])) {
+            // Récupération de la nouvelle tâche depuis le formulaire
+            $nouvelle_tache = $_POST['nouvelle_tache'];
+            
+            // Création de la requête SQL pour insérer la nouvelle tâche dans la base de données
+            $sql = "INSERT INTO liste (titre, fait) VALUES ('$nouvelle_tache', 0)";
+            
+            // Exécution de la requête SQL
+            if(mysqli_query($connexion, $sql)) {
+                // Recharge la page pour afficher la tâche ajoutée
+                header("Location: index.php");
+                exit();
+            } else {
+                echo "Erreur lors de l'ajout de la tâche : " . mysqli_error($connexion);
+            }
+        } else {
+            echo "Veuillez saisir une nouvelle tâche.";
+        }
     }
 ?>
+
 
