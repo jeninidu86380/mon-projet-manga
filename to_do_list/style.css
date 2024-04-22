@@ -1,6 +1,7 @@
 body {
     background-color: #aa97ff;
 }
+
 /* Style du conteneur principal */
 .container {
     background-color: #75caf8; /* Couleur de fond */
@@ -11,12 +12,13 @@ body {
     margin: auto; /* Centrage horizontal du conteneur */
     padding: 20px; /* Espacement intérieur */
     min-height: 100vh; /* Hauteur minimale équivalente à la taille de l'écran */
-    border-radius: 30px; /*arrondit les coins de la bordure*/
+    border-radius: 30px; /* Arrondit les coins de la bordure */
 }
 
 /* Style des formulaires à l'intérieur du conteneur */
 .container form {
     text-align: center; /* Centrage horizontal des éléments du formulaire */
+    margin-bottom: 20px; /* Espacement en bas des formulaires */
 }
 
 /* Style des champs de texte */
@@ -27,8 +29,8 @@ body {
 
 /* Style des boutons */
 .container button {
-    margin-top: 20px; /* Espacement du haut du bouton */
-    border-radius: 40px; /*arrondit les coins de la bordure*/
+    margin-top: 10px; /* Espacement du haut du bouton */
+    border-radius: 20px; /* Arrondit les coins de la bordure */
 }
 
 /* Style global pour tous les éléments */
@@ -50,19 +52,15 @@ button:hover {
     background: #aa97ff; /* Changement de couleur de fond */
 }
 
-/* Style de la liste des tâches */
-ul {
-    list-style: none; /* Suppression des puces de liste */
-    padding: 0%; /* Suppression des marges intérieures */
-}
-
-/* Style des éléments de liste */
-li {
-    display: flex; /* Affichage en flexbox pour aligner les éléments */
-    margin-bottom: 10px; /* Espacement entre les éléments de la liste */
-}
-
 /* Style des cases à cocher */
-li input[type="checkbox"] {
+input[type="checkbox"] {
     margin-right: 10px; /* Espacement à droite des cases à cocher */
+    margin-bottom: 5px; /* Espacement en bas des cases à cocher */
+    display: block; /* Affichage en bloc pour centrer les cases à cocher les unes sous les autres */
 }
+
+/* Style du bouton Supprimer */
+button[name="delete"] {
+    margin-top: 20px; /* Légèrement plus haut pour déplacer le bouton vers le haut */
+}
+

@@ -130,3 +130,131 @@ Voici quelques évolutions possibles pour améliorer notre Todolist :
 ● ajouter des catégories aux tâches,
 ● ajouter un système de filtres et de tri,
 ● …toutes autres fonctionnalités qui vous paraissent utiles.
+
+<?php
+// Connexion à la BDD
+// Paramètres de connexion à la base de données
+
+$serveur = "localhost";
+
+$utilisateur = "root";
+
+$motdepasse = "";
+
+$nomBaseDeDonnees = "todolist";
+ 
+// Connexion à la base de données
+
+$connexion = mysqli_connect($serveur, $utilisateur, $motdepasse, $nomBaseDeDonnees);
+ 
+if (!$connexion) {
+
+    die("Connexion échouée : " . mysqli_connect_error());
+}
+ 
+// Traitement form listeTaches
+
+if (isset($_POST['listeTaches'])) {
+
+	// print_r($_POST);
+
+	// Retour de $_POST : 12 => on, 5 => on, listeTaches => true
+ 
+	// Mettre les checkbox des taches à non cochées
+
+	$sql = 'UPDATE tache SET fait = 0';
+
+	mysqli_query($connexion, $sql);
+ 
+	// Boucler sur les id provenant du formulaire pour mettre à jour la base
+
+	foreach ($_POST as $key => $value) {
+
+		if ($key != 'listeTaches') {
+
+			$sql = "UPDATE tache SET fait = 1 WHERE id = $key";
+
+			mysqli_query($connexion, $sql);
+
+		}
+	}
+}
+ 
+// Traitement form ajoutTache
+
+if (isset($_POST['ajoutTache'])) {
+ 
+	// Récupération du titre de la tache du formulaire
+
+	$titre = $_POST['titre'];
+ 
+	// Enregistrement en BDD de la tache
+
+	$sql = 'INSERT INTO tache (titre, fait) VALUES ($tache, 0)';
+
+	mysqli_query($connexion, $sql);
+
+}
+// HTML : Header
+
+?> <!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title></title>
+
+</head>
+<body>
+ 
+<!-- Affichage du form listeTaches -->
+
+<form action="" method="post">
+
+	<?php
+
+	$sql = "SELECT * FROM tache";
+
+	$resultat = mysqli_query($connexion, $sql);
+
+	foreach ($resultat as $tache) {
+ 
+		// Mettre checked si la tache en BDD est "fait" = true
+
+		$caseCheck = '';
+
+		if ($tache['fait'] === true) {
+
+			$caseCheck = 'checked';
+
+		}
+
+		echo '<input type="checkbox" name="tache[]" value="' . $tache['id'] . '  ' . $caseCheck . ' />';
+
+		echo $tache['titre'] . '<br />';
+
+	}
+
+	?>
+
+	<input type="submit" name="listeTaches">
+
+</form>
+ 
+<!-- Affichage du form ajoutTache -->
+
+<form action="" method="post">
+
+	<input type="text" name="titre">
+
+	<input type="submit" name="ajoutTache">
+
+</form>
+ 
+<!-- HTML : Footer -->
+
+</body>
+</html>
