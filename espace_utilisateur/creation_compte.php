@@ -25,25 +25,45 @@
         $nom = $_POST['nom'];
         $email = $_POST['email'];
         $mot_de_passe = md5($_POST['mot_de_passe']); // Hashage du mot de passe avec MD5
+        
+        // Préparer la requête SELECT pour vérifier si l'utilisateur existe
+        $verification ="SELECT * FROM compte WHERE email='$email'";
+        $resultat_verification= mysqli_query($connexion, $verification);//l'utilisateur n'existe pas, l'insère dans la BDD 
+
+        // Vérifier si l'utilisateur existe
+        if(mysqli_num_rows($resultat_verification) == 0) {
 
         // Préparer la requête d'insertion
         $insertion = "INSERT INTO compte (nom, email, mot_de_passe) VALUES ('" . $_POST ['nom'] . "', '" . $_POST ['email'] . "', '" . $_POST ['mot_de_passe'] . "')";
-
+        
         // Exécuter la requête d'insertion
         if (mysqli_query($connexion, $insertion)) {
             echo "Enregistrement réussi !";
         } else {
             echo "Erreur d'enregistrement: " . mysqli_error($connexion);
         }
+        // Démarrer la session
+        session_start();
 
-        // Redirection vers la page de connexion
-        header('location: connexion_compte.php');
+        // Stocker l'email de l'utilisateur dans une variable de session
+        $_SESSION['email'] = $email;
 
-        // Fermer la connexion à la base de données
-        mysqli_close($connexion);
+        // Rediriger l'utilisateur vers une page de votre choix
+        header("Location: accueil_compte.php");
+
+        exit();     // terminer l'exécution du script après la redirection
         } else {
-            echo "Tous les champs du formulaire doivent être remplis.";
-    }
+        echo "email utilisé, entrer un autre email.";
+        }
+
+        //fermer le résultat de la requête de vérification
+        mysqli_free_result($resultat_verification);
+        } else {
+        echo "Tous les champs du formulaire doivent être remplis.";
+        }
+        
+        // Fermer la connexion à la base de données
+        mysqli_close($connexion); 
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -56,7 +76,7 @@
     <link href="deconnexion_compte.php" rel="stylesheet">
 </head>
 <body>
-<main>
+<main class="container-fluid">
     <h1> Formulaire de création utilisateur : </h1>
 
     <form action="" method="post">
@@ -71,6 +91,7 @@
         <input type="password" name="mot_de_passe" id="mot_de_passe" required>
 
         <input type="submit" value="Valider">
+
     </form>
 </main>
 </body>

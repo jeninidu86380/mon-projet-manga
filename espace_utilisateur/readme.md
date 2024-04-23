@@ -7,7 +7,6 @@
 ### Persistance de la session
 ### Déconnexion
  
- 
 ## Pré-requis
  
 ### Dossier projet dans c:\wampp\...
@@ -91,8 +90,6 @@ Si les identifiants sont corrects, démarrer une session et rediriger l'utilisat
 
 Sécurisation de l'espace utilisateur
 
-Objectif
-
 Protéger l'accès à la page de profil, permettant uniquement aux utilisateurs connectés de la voir.
 
 Tâches
@@ -112,3 +109,69 @@ Tâches
 
 Créer un bouton de déconnexion sur la page de profil html.
 Faire une redirection vers la page de connexion.Écrire un script PHP qui détruit la session lorsque l'utilisateur clique sur le bouton de déconnexion.
+
+[14:37] Emmanuel Rocher
+<?php
+Objectif : Permettre à l'utilisateur de se connecter à son compte
+ 
+Contenu de la page : 
+
+	Titre de la page : h1 "Connexion au compte utilisateur"
+
+	Formulaire de création de compte : 
+
+		- E-mail (email) : input type text - obligatoire
+
+		- Mot de passe (mot_de_passe) : input type text - obligatoire
+
+		- Bouton "Valider" (valider) : input type submit
+ 
+Action à la validation du formulaire :
+
+	- Détecter la validation formulaire
+
+	- Récupérer les données du formulaire : email, mot_de_passe
+
+	- Vérification de l'existance d'un utilisateur en base avec l'email et le mot de passe correspond
+// 5) Connexion à la base
+ 
+// 6) Texter la validation formulaire
+ 
+// 7) Vérifier l'existance de cette utilisateur en base (email, mot de passe)
+
+// $_POST['email'] - $_POST['mot_de_passe']
+
+	$sql = 'SELECT * FROM ';
+ 
+	// 8) Rediriger vers page accueil-compte.php
+?>
+<!-- // 1) Balises HTML 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> création compte utilisateur </title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main class="container-fluid">
+ // 3) Titre de la page 
+<h1>Connexion compte utilisateur</h1>
+ // 4) Formulaire de  connexion de compte 
+<form action="" method="post">
+
+	<label for="email">E-mail</label>
+
+	<input type="email" name="email" id="email" required>
+
+	<label for="mot_de_passe">Mot de passe</label>
+
+	<input type="password" name="mot_de_passe" id="mot_de_passe" required>
+ 
+	<input type="submit" name="connexion" value="Connexion"--
+</form>
+ // 2) Fin des balises HTML 
+</main>
+</body>
+</html>-->
