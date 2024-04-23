@@ -31,7 +31,7 @@
         $resultat_verification= mysqli_query($connexion, $verification);//l'utilisateur n'existe pas, l'insère dans la BDD 
 
         // Vérifier si l'utilisateur existe
-        if(mysqli_num_rows($resultat_verification) == 0) {
+        if(mysqli_num_rows($resultat_verification) > 0) {
 
         // Préparer la requête d'insertion
         $insertion = "INSERT INTO compte (nom, email, mot_de_passe) VALUES ('" . $_POST ['nom'] . "', '" . $_POST ['email'] . "', '" . $_POST ['mot_de_passe'] . "')";
