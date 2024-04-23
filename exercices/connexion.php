@@ -10,7 +10,7 @@ $connexion = mysqli_connect
 // vérifier la connexion
 if (!$connexion) {
     die("echec de la connexion :". mysqli_connect_error());
-} else {
+} else {    
     echo "connexion réussi à la bd.";
 }
 // exécuter une requête SELECT
